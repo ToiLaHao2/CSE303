@@ -1,15 +1,11 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-        EIMIN();
+        // EIMIN();
+        EIUQBHV();
     }
 
     public static void EIMIN() {
@@ -52,8 +48,40 @@ public class App {
             trS.add(ni());
         }
 
-        Iterator<Integer> iterator = trS.iterator();
+        int temp = 0;
 
+        while (trS.isEmpty() != true) {
+            int x = trS.first();
+            if (temp == 0) {
+                sb.append(x);
+            }
+
+        }
+    }
+
+    public static void EIUQBHV() {
+        String input = ns();
+
+        TreeSet<String> output = new TreeSet<>();
+        StringBuilder sb = new StringBuilder();
+        char[] keyCharacters = input.toCharArray();
+        output.add("");
+
+        for (char newChar : keyCharacters) {
+            TreeSet<String> newOutput = new TreeSet<>();
+            for (String key : output) {
+                for (int i = 0; i <= key.length(); i++) {
+                    String newKey = key.substring(0, i) + newChar + key.substring(i);
+                    newOutput.add(newKey);
+                }
+            }
+            output.clear();
+            output.addAll(newOutput);
+        }
+        for (String key : output) {
+            sb.append(key + "\n");
+        }
+        System.out.println(output.size() + "\n" + sb);
     }
 
     // Bộ reader mới

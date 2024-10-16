@@ -8,40 +8,33 @@ import java.util.TreeSet;
 class  Main {
 
     public static void main(String[] args) throws Exception {
-        EIMIN();
+        EIUQBHV();
     }
 
-    public static void EIMIN() {
-        int n = ni();
-        int k = ni();
-        StringBuffer sb = new StringBuffer();
-        TreeSet<Integer> trSet = new TreeSet<>();
+    public static void EIUQBHV() {
+        String input = ns();
 
-        for (int i = 0; i < n; i++) {
-            trSet.add(ni());
-        }
-        for (int i = 0; i < k; i++) {
-            int a = trSet.first();
-            sb.append(a + "\n");
+        TreeSet<String> output = new TreeSet<>();
+        StringBuilder sb = new StringBuilder();
+        char[] keyCharacters = input.toCharArray();
+        output.add("");
 
-            TreeSet<Integer> newElements = new TreeSet<>();
-            Iterator<Integer> iterator = trSet.iterator();
-            while (iterator.hasNext()) {
-                int x = iterator.next();
-                int temp = x - a;
-                if (temp > 0) {
-                    newElements.add(temp);
+        for (char newChar : keyCharacters) {
+            TreeSet<String> newOutput = new TreeSet<>();
+            for (String key : output) {
+                for (int i = 0; i <= key.length(); i++) {
+                    String newKey = key.substring(0, i) + newChar + key.substring(i);
+                    newOutput.add(newKey);
                 }
-                iterator.remove();
             }
-            trSet.addAll(newElements);
-            if (trSet.isEmpty()) {
-                trSet.add(0);
-            }
+            output.clear();
+            output.addAll(newOutput);
         }
-        System.out.println(sb);
+        for (String key : output) {
+                sb.append(key + "\n");
+        }
+        System.out.println(output.size() + "\n" + sb);
     }
-
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
