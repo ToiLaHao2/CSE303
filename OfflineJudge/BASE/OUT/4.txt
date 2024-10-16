@@ -1,7 +1,1 @@
-6
-CFT
-CTF
-FCT
-FTC
-TCF
-TFC
+1

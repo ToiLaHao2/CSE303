@@ -1,7 +1,1 @@
-6
-ABC
-ACB
-BAC
-BCA
-CAB
-CBA
+0

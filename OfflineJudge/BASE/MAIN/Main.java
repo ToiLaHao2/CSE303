@@ -1,39 +1,37 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
+import java.io.*;
 
 class  Main {
-
     public static void main(String[] args) throws Exception {
-        EIUQBHV();
+        EISUBARRAY();
     }
+    public static void EISUBARRAY() {
+        int n = ni();
+        int[] A = new int[n];
 
-    public static void EIUQBHV() {
-        String input = ns();
-
-        TreeSet<String> output = new TreeSet<>();
-        StringBuilder sb = new StringBuilder();
-        char[] keyCharacters = input.toCharArray();
-        output.add("");
-
-        for (char newChar : keyCharacters) {
-            TreeSet<String> newOutput = new TreeSet<>();
-            for (String key : output) {
-                for (int i = 0; i <= key.length(); i++) {
-                    String newKey = key.substring(0, i) + newChar + key.substring(i);
-                    newOutput.add(newKey);
-                }
-            }
-            output.clear();
-            output.addAll(newOutput);
+        for (int i = 0; i < n; i++) {
+            A[i] = ni();
         }
-        for (String key : output) {
-                sb.append(key + "\n");
+
+        int max_ending_here = A[0];
+        int max_so_far = A[0];
+
+        for (int i = 1; i < A.length; i++) {
+            max_ending_here = Math.max(A[i], max_ending_here + A[i]);
+            max_so_far = Math.max(max_so_far, max_ending_here);
         }
-        System.out.println(output.size() + "\n" + sb);
+
+        int min_ending_here = A[0];
+        int min_so_far = A[0];
+
+        for (int i = 1; i < A.length; i++) {
+            min_ending_here = Math.min(A[i], min_ending_here + A[i]);
+            min_so_far = Math.min(min_so_far, min_ending_here);
+        }
+
+        int result = Math.max(Math.abs(max_so_far), Math.abs(min_so_far));
+
+        System.out.println(result);
     }
     // Bộ reader mới
     static InputStream is = System.in;
@@ -134,4 +132,3 @@ class  Main {
         }
     }
 }
-

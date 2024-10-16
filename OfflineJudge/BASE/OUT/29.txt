@@ -1,7 +1,1 @@
-6
-COQ
-CQO
-OCQ
-OQC
-QCO
-QOC
+96256

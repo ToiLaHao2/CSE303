@@ -4,8 +4,7 @@ import java.util.*;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        // EIMIN();
-        EIUQBHV();
+        EISUBARRAY();
     }
 
     public static void EIMIN() {
@@ -82,6 +81,56 @@ public class App {
             sb.append(key + "\n");
         }
         System.out.println(output.size() + "\n" + sb);
+    }
+
+    public static void EISUBARRAY() {
+        int n = ni();
+        int[] A = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            A[i] = ni();
+        }
+
+        int max_ending_here = A[0];
+        int max_so_far = A[0];
+
+        for (int i = 1; i < A.length; i++) {
+            max_ending_here = Math.max(A[i], max_ending_here + A[i]);
+            max_so_far = Math.max(max_so_far, max_ending_here);
+        }
+
+        int min_ending_here = A[0];
+        int min_so_far = A[0];
+
+        for (int i = 1; i < A.length; i++) {
+            min_ending_here = Math.min(A[i], min_ending_here + A[i]);
+            min_so_far = Math.min(min_so_far, min_ending_here);
+        }
+
+        int result = Math.max(Math.abs(max_so_far), Math.abs(min_so_far));
+
+        System.out.println(result);
+    }
+
+    public static void EIQUEENS() {
+        char[][] board = new char[8][8];
+        int count = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                char temp = nc();
+                board[i][j] = temp;
+                if (temp == '*' && count == i) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        if (count != 8) {
+            System.out.println("invalid");
+        }
+
     }
 
     // Bộ reader mới
