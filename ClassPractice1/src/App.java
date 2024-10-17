@@ -129,8 +129,46 @@ public class App {
 
         if (count != 8) {
             System.out.println("invalid");
-        }
+        } else {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (board[i][j] == '*') {
 
+                    }
+                }
+            }
+        }
+    }
+
+    public static boolean CheckColumn(int i, int j, char[][] board) {
+        for (int j2 = i; j2 < 8 - i; j2++) {
+            if (board[j2][j] == '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean CheckMainDiagonal(int i, int j, char[][] board) {
+        for (int num = j + 1; num < 8; num++) {
+            i++;
+            j++;
+            if (board[j][j] == '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean CheckSecondaryDiagonal(int i, int j, char[][] board) {
+        while (j > -1) {
+            i++;
+            j--;
+            if (board[j][j] == '*') {
+                return false;
+            }
+        }
+        return true;
     }
 
     // Bộ reader mới
