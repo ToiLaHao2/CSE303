@@ -4,7 +4,7 @@ import java.util.*;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        EISUBARRAY();
+        EIQUEENS();
     }
 
     public static void EIMIN() {
@@ -113,62 +113,48 @@ public class App {
     }
 
     public static void EIQUEENS() {
-        char[][] board = new char[8][8];
-        int count = 0;
+        Queen[] arr = new Queen[8];
+        boolean flag = true;
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                char temp = nc();
-                board[i][j] = temp;
-                if (temp == '*' && count == i) {
-                    count++;
-                } else {
+            String line = ns();
+            int col = line.indexOf('*');
+            if (col == -1) {
+                flag = false;
+                break;
+            }
+            arr[i] = new Queen(i, col);
+        }
+
+        if (flag == true) {
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = i + 1; j < arr.length; j++) {
+                    if (arr[i].col == arr[j].col || arr[i].row == arr[j].row
+                            || Math.abs(arr[i].row - arr[j].row) == Math.abs(arr[i].col - arr[j].col)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag == false) {
                     break;
                 }
             }
         }
 
-        if (count != 8) {
-            System.out.println("invalid");
+        if (flag == true) {
+            System.out.println("valid");
         } else {
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    if (board[i][j] == '*') {
-
-                    }
-                }
-            }
+            System.out.println("invalid");
         }
     }
 
-    public static boolean CheckColumn(int i, int j, char[][] board) {
-        for (int j2 = i; j2 < 8 - i; j2++) {
-            if (board[j2][j] == '*') {
-                return false;
-            }
-        }
-        return true;
-    }
+    static class Queen {
+        private int row;
+        private int col;
 
-    public static boolean CheckMainDiagonal(int i, int j, char[][] board) {
-        for (int num = j + 1; num < 8; num++) {
-            i++;
-            j++;
-            if (board[j][j] == '*') {
-                return false;
-            }
+        public Queen(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
-        return true;
-    }
-
-    public static boolean CheckSecondaryDiagonal(int i, int j, char[][] board) {
-        while (j > -1) {
-            i++;
-            j--;
-            if (board[j][j] == '*') {
-                return false;
-            }
-        }
-        return true;
     }
 
     // Bộ reader mới
