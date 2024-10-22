@@ -25,9 +25,9 @@ public class App {
     }
 
     public static void EIULOVE(){
-        int numOfGift = ni();
-        int moneyInPock = ni();
-        int giftMax = -1;
+        long numOfGift = nl();
+        long moneyInPock = nl();
+        long giftMax = -1;
 
         for (int i = 0; i < numOfGift; i++) {
             int temp = ni();
