@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class App {
+class  Main {
 
     public static void main(String[] args) throws Exception {
         EIGIFT1();
@@ -182,21 +182,21 @@ public class App {
         int numOfGift = ni();
         int numOfPapers = ni();
 
-        double[] gifts = new double[numOfGift];
-        double[] papers = new double[numOfPapers];
+        int[] gifts = new int[numOfGift];
+        int[] papers = new int[numOfPapers];
 
         for (int i = 0; i < numOfGift; i++) {
-            gifts[i] = nd();
+            gifts[i] = ni();
         }
         for (int i = 0; i < numOfPapers; i++) {
-            papers[i] = nd();
+            papers[i] = ni();
         }
 
         Arrays.sort(gifts);
         Arrays.sort(papers);
 
-        int i = 0;
-        int j = 0;
+        int i         = 0;
+        int j         = 0;
         int giftWrapt = 0;
 
         while (i < numOfGift && j < numOfPapers) {
@@ -212,8 +212,6 @@ public class App {
         }
         System.out.println(giftWrapt);
     }
-
-    
 
     // Bộ reader mới
     static InputStream is = System.in;
@@ -314,3 +312,4 @@ public class App {
         }
     }
 }
+
