@@ -18,26 +18,65 @@ public class App {
             }
             long numOfWays = 0;
             for (int g : gifts.values()) {
-                numOfWays += (((long)g*((long)g-1))/2);
+                numOfWays += (((long) g * ((long) g - 1)) / 2);
             }
             System.out.println(numOfWays);
         }
     }
 
-    public static void EIULOVE(){
+    public static void EIULOVE() {
         long numOfGift = nl();
         long moneyInPock = nl();
         long giftMax = -1;
 
         for (int i = 0; i < numOfGift; i++) {
             int temp = ni();
-            if (temp > giftMax && temp<moneyInPock) {
+            if (temp > giftMax && temp < moneyInPock) {
                 giftMax = temp;
             }
         }
 
         System.out.println(giftMax);
     }
+
+    public static void EIGIFTS() {
+        int numOfGift = ni();
+        long moneyInPock = nl();
+
+        long totalAmount = -1;
+        long difBtwTGift = Integer.MAX_VALUE;
+
+        long[] gifts = new long[numOfGift];
+
+        for (int i = 0; i < numOfGift; i++) {
+            gifts[i] = nl();
+        }
+
+        Arrays.sort(gifts);
+
+        for (int i = 0; i < numOfGift; i++) {
+            for (int j = i + 1; j < numOfGift; j++) {
+                long totalTemp = gifts[i] + gifts[j];
+                if (totalTemp > moneyInPock) {
+                    break;
+                }
+                long diff = Math.abs(gifts[i] - gifts[j]);
+
+                if (totalTemp <= moneyInPock
+                        && (totalTemp > totalAmount || (totalTemp == totalAmount && diff < difBtwTGift))) {
+                    totalAmount = totalTemp;
+                    difBtwTGift = diff;
+                }
+            }
+        }
+
+        if (totalAmount == -1) {
+            System.out.println("-1 -1");
+        } else {
+            System.out.println(totalAmount + " " + difBtwTGift);
+        }
+    }
+
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
