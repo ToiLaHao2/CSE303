@@ -1,218 +1,28 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 class  Main {
-
     public static void main(String[] args) throws Exception {
-        EIGIFT1();
+        EIPAIR();
     }
 
-    public static void EIMIN() {
-        int n = ni();
-        int k = ni();
-        StringBuffer sb = new StringBuffer();
-        TreeSet<Integer> trSet = new TreeSet<>();
+    public static void EIPAIR() {
+        int numOfT = ni();
 
-        for (int i = 0; i < n; i++) {
-            trSet.add(ni());
-        }
-        for (int i = 0; i < k; i++) {
-            int a = trSet.first();
-            sb.append(a + "\n");
-
-            TreeSet<Integer> newElements = new TreeSet<>();
-            Iterator<Integer> iterator = trSet.iterator();
-            while (iterator.hasNext()) {
-                int x = iterator.next();
-                int temp = x - a;
-                if (temp > 0) {
-                    newElements.add(temp);
-                }
-                iterator.remove();
+        for (int i = 0; i < numOfT; i++) {
+            Map<Integer, Integer> gifts = new HashMap<>();
+            int numOfG = ni();
+            for (int j = 0; j < numOfG; j++) {
+                int g = ni();
+                gifts.put(g, gifts.getOrDefault(g, 0) + 1);
             }
-            trSet.addAll(newElements);
-            if (trSet.isEmpty()) {
-                trSet.add(0);
+            long numOfWays = 0;
+            for (int g : gifts.values()) {
+                numOfWays += (((long)g*((long)g-1))/2);
             }
-        }
-        System.out.println(sb);
-    }
-
-    public static void EIPAGES() {
-        int n = ni();
-        StringBuilder sb = new StringBuilder();
-        TreeSet<Integer> trS = new TreeSet<>();
-
-        for (int i = 0; i < n; i++) {
-            trS.add(ni());
-        }
-
-        int temp = 0;
-
-        while (trS.isEmpty() != true) {
-            int x = trS.first();
-            if (temp == 0) {
-                sb.append(x);
-            }
-
+            System.out.println(numOfWays);
         }
     }
-
-    public static void EIUQBHV() {
-        String input = ns();
-
-        TreeSet<String> output = new TreeSet<>();
-        StringBuilder sb = new StringBuilder();
-        char[] keyCharacters = input.toCharArray();
-        output.add("");
-
-        for (char newChar : keyCharacters) {
-            TreeSet<String> newOutput = new TreeSet<>();
-            for (String key : output) {
-                for (int i = 0; i <= key.length(); i++) {
-                    String newKey = key.substring(0, i) + newChar + key.substring(i);
-                    newOutput.add(newKey);
-                }
-            }
-            output.clear();
-            output.addAll(newOutput);
-        }
-        for (String key : output) {
-            sb.append(key + "\n");
-        }
-        System.out.println(output.size() + "\n" + sb);
-    }
-
-    public static void EISUBARRAY() {
-        int n = ni();
-        int[] A = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            A[i] = ni();
-        }
-
-        int max_ending_here = A[0];
-        int max_so_far = A[0];
-
-        for (int i = 1; i < A.length; i++) {
-            max_ending_here = Math.max(A[i], max_ending_here + A[i]);
-            max_so_far = Math.max(max_so_far, max_ending_here);
-        }
-
-        int min_ending_here = A[0];
-        int min_so_far = A[0];
-
-        for (int i = 1; i < A.length; i++) {
-            min_ending_here = Math.min(A[i], min_ending_here + A[i]);
-            min_so_far = Math.min(min_so_far, min_ending_here);
-        }
-
-        int result = Math.max(Math.abs(max_so_far), Math.abs(min_so_far));
-
-        System.out.println(result);
-    }
-
-    public static void EIQUEENS() {
-        Queen[] arr = new Queen[8];
-        boolean flag = true;
-        for (int i = 0; i < 8; i++) {
-            String line = ns();
-            int col = line.indexOf('*');
-            if (col == -1) {
-                flag = false;
-                break;
-            }
-            arr[i] = new Queen(i, col);
-        }
-
-        if (flag == true) {
-            for (int i = 0; i < arr.length; i++) {
-                for (int j = i + 1; j < arr.length; j++) {
-                    if (arr[i].col == arr[j].col || arr[i].row == arr[j].row
-                            || Math.abs(arr[i].row - arr[j].row) == Math.abs(arr[i].col - arr[j].col)) {
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag == false) {
-                    break;
-                }
-            }
-        }
-
-        if (flag == true) {
-            System.out.println("valid");
-        } else {
-            System.out.println("invalid");
-        }
-    }
-
-    static class Queen {
-        private int row;
-        private int col;
-
-        public Queen(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-    }
-
-    public static void EIPAINTING() {
-        int numOfPics = ni();
-        Map<Integer, Integer> Painting = new HashMap<>();
-
-        for (int i = 0; i < numOfPics; i++) {
-            int pic = ni();
-            if (Painting.containsKey(pic)) {
-                Painting.put(pic, Painting.get(pic) + 1);
-            } else {
-                Painting.put(pic, 1);
-            }
-        }
-
-        ArrayList<Integer> ListPainting = new ArrayList<>(Painting.values());
-        ListPainting.sort((n1, n2) -> {
-            return n2 - n1;
-        });
-
-        System.out.println(numOfPics - ListPainting.get(0));
-    }
-
-    public static void EIGIFT1() {
-        int numOfGift = ni();
-        int numOfPapers = ni();
-
-        int[] gifts = new int[numOfGift];
-        int[] papers = new int[numOfPapers];
-
-        for (int i = 0; i < numOfGift; i++) {
-            gifts[i] = ni();
-        }
-        for (int i = 0; i < numOfPapers; i++) {
-            papers[i] = ni();
-        }
-
-        Arrays.sort(gifts);
-        Arrays.sort(papers);
-
-        int i         = 0;
-        int j         = 0;
-        int giftWrapt = 0;
-
-        while (i < numOfGift && j < numOfPapers) {
-            if (papers[j] / gifts[i] < 2) {
-                j++;
-            } else if (papers[j] / gifts[i] > 3) {
-                i++;
-            } else {
-                i++;
-                j++;
-                giftWrapt++;
-            }
-        }
-        System.out.println(giftWrapt);
-    }
-
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
