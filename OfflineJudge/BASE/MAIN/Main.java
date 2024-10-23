@@ -1,9 +1,9 @@
 import java.util.*;
 import java.io.*;
 
-public class App {
+class  Main {
     public static void main(String[] args) throws Exception {
-        EI2122Q1ADAM2();
+        EIGIFTS();
     }
 
     public static void EIPAIR() {
@@ -61,7 +61,7 @@ public class App {
             long totalTemp = gifts[left] + gifts[right];
 
             if (totalTemp > moneyInPock) {
-                right--;
+                right--; 
             } else {
                 long diff = Math.abs(gifts[left] - gifts[right]);
 
@@ -69,7 +69,7 @@ public class App {
                     totalAmount = totalTemp;
                     difBtwTGift = diff;
                 }
-                left++;
+                left++; 
             }
         }
 
@@ -78,75 +78,6 @@ public class App {
         } else {
             System.out.println(totalAmount + " " + difBtwTGift);
         }
-    }
-
-    public static void EI2122Q1ADAM1() {
-        int n = ni();
-        int x = ni();
-        int count = 0;
-        Map<Integer, Integer> nums = new HashMap<>();
-
-        for (int i = 0; i < n; i++) {
-            int temp = ni();
-
-            int target = temp - x;
-            if (nums.containsKey(target)) {
-                count += nums.get(target);
-            }
-
-            nums.put(temp, nums.getOrDefault(temp, 0) + 1);
-        }
-
-        System.out.println(count);
-    }
-
-    public static void EI2122Q1ADAM2() {
-        int n = ni();
-        int m = ni();
-        int x = ni();
-        int count = 0;
-        int h = 0;
-
-        int[] men = new int[n];
-        int[] women = new int[m];
-        Map<Integer, Integer> pairs = new TreeMap<>();
-
-        for (int i = 0; i < men.length; i++) {
-            men[i] = ni();
-        }
-
-        for (int i = 0; i < women.length; i++) {
-            women[i] = ni();
-        }
-
-        Arrays.sort(men);
-        Arrays.sort(women);
-
-        int high = (men[n - 1] - women[0]) > (women[m - 1] - men[0]) ? (women[m - 1] - men[0])
-                : (men[n - 1] - women[0]);
-        int mid = high / 2;
-
-        for (int i = 0; i < men.length; i++) {
-            for (int j = 0; j < women.length; j++) {
-                int diff = Math.abs(men[i] - women[j]);
-                if (diff < mid) {
-                    pairs.put(diff, pairs.getOrDefault(diff, 0) + 1);
-                } else {
-                    break;
-                }
-            }
-        }
-
-        for (Map.Entry<Integer, Integer> entry : pairs.entrySet()) {
-            h = entry.getKey();
-            Integer value = entry.getValue();
-            count += value;
-            if (count > x) {
-                break;
-            }
-        }
-
-        System.out.println(h);
     }
 
     // Bộ reader mới
@@ -248,3 +179,4 @@ public class App {
         }
     }
 }
+
