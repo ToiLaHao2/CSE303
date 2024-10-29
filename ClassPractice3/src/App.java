@@ -103,21 +103,90 @@ public class App {
         System.out.println(output.size() + "\n" + sb);
     }
 
-    // public static void EIFLIP() {
+    public static void EIFLIP() {
+        int n = ni();
 
-    // }
+        while (n > 0) {
 
-    // public class Node {
-    // private int x;
-    // private int y;
-    // private char value;
+            // nhap
+            MatrixMap resultMatrix = new MatrixMap();
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    char x = nc();
+                    if (x == '*') {
+                        resultMatrix.SetPosition(i, j, true);
+                    } else {
+                        resultMatrix.SetPosition(i, j, false);
+                    }
+                }
+            }
 
-    // public Node(int x, int y, char value) {
-    // this.x = x;
-    // this.y = y;
-    // this.value = value;
-    // }
-    // }
+            // ArrayList<ArrayList<Node>>subsets = new ArrayList<>();
+            // for (int i = 0; i < 3; i++) {
+            // for (int j = 0; j < 3; j++)
+            // subsets.add(new Node(i,j));
+            // int temp = subsets.size() - 1;
+            // for (int j = 0; j < temp; j++) {
+            // ArrayList<Integer>newSet= new ArrayList<>();
+            // newSet.add(i);
+            // newSet.addAll(subsets.get(j));
+            // if (compareMatrix(translateSet(newSet),resultSet)==true){
+            // System.out.println(newSet.size());
+            // break;
+            // }
+            // subsets.add(newSet);
+            // }
+            // }
+            n--;
+        }
+
+    }
+
+    public MatrixMap translateSet(ArrayList<Integer> set) {
+        MatrixMap resultMap = new MatrixMap();
+        for (Integer integer : set) {
+
+        }
+        return resultMap;
+    }
+
+    public static class MatrixMap {
+        private boolean[][] matrix;
+
+        public MatrixMap() {
+            matrix = new boolean[3][3];
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    matrix[i][j] = false;
+                }
+            }
+        }
+
+        public void SetPosition(int x, int y, boolean value) {
+            matrix[x][y] = value;
+        }
+
+        public boolean CompareMap(MatrixMap mapT) {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 0; j++) {
+                    if (matrix[i][j] != mapT.matrix[i][j]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
+    public static class Node {
+        private int x;
+        private int y;
+
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     // Bộ reader mới
     static InputStream is = System.in;
