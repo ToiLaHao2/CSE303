@@ -1,11 +1,9 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.InputMismatchException;
+import java.io.*;
+import java.util.*;
 
 class  Main {
     public static void main(String[] args) throws Exception {
-        EIEQUALS();
+        EIUSUBSET();
     }
 
     public static void EIEQUALS() {
@@ -36,7 +34,7 @@ class  Main {
             int temp = 0;
             int i = 0;
             int j = 0;
-            while (i < n && j < n) {
+            while (i < n && j < n && temp > 1) {
                 if (arrA[i] == arrB[j]) {
                     i++;
                     j++;
@@ -53,8 +51,73 @@ class  Main {
                 System.out.println("YES");
             }
         }
-
     }
+
+    public static void EIUSUBSET() {
+        int n = ni();
+        ArrayList<Integer> sets = new ArrayList<>();
+        ArrayList<String> subsets = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            sets.add(ni());
+        }
+
+        for (int i = sets.size() - 1; i >= 0; i--) {
+            subsets.add(String.valueOf(sets.get(i)));
+            int temp = subsets.size() - 1;
+            for (int j = 0; j < temp; j++) {
+                subsets.add(sets.get(i) + " " + subsets.get(j));
+            }
+        }
+
+        sb.append(subsets.size() + "\n");
+        for (String string : subsets) {
+            sb.append(string + "\n");
+        }
+        System.out.println(sb);
+    }
+
+    public static void EIUQBHV() {
+        String input = ns();
+
+        TreeSet<String> output = new TreeSet<>();
+        StringBuilder sb = new StringBuilder();
+        char[] keyCharacters = input.toCharArray();
+        output.add("");
+
+        for (char newChar : keyCharacters) {
+            TreeSet<String> newOutput = new TreeSet<>();
+            for (String key : output) {
+                for (int i = 0; i <= key.length(); i++) {
+                    String newKey = key.substring(0, i) + newChar + key.substring(i);
+                    newOutput.add(newKey);
+                }
+            }
+            output.clear();
+            output.addAll(newOutput);
+        }
+        for (String key : output) {
+            sb.append(key + "\n");
+        }
+        System.out.println(output.size() + "\n" + sb);
+    }
+
+    // public static void EIFLIP() {
+
+    // }
+
+    // public class Node {
+    // private int x;
+    // private int y;
+    // private char value;
+
+    // public Node(int x, int y, char value) {
+    // this.x = x;
+    // this.y = y;
+    // this.value = value;
+    // }
+    // }
 
     // Bộ reader mới
     static InputStream is = System.in;

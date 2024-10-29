@@ -58,31 +58,6 @@ public class App {
         }
     }
 
-    public static void EIUQBHV() {
-        String input = ns();
-
-        TreeSet<String> output = new TreeSet<>();
-        StringBuilder sb = new StringBuilder();
-        char[] keyCharacters = input.toCharArray();
-        output.add("");
-
-        for (char newChar : keyCharacters) {
-            TreeSet<String> newOutput = new TreeSet<>();
-            for (String key : output) {
-                for (int i = 0; i <= key.length(); i++) {
-                    String newKey = key.substring(0, i) + newChar + key.substring(i);
-                    newOutput.add(newKey);
-                }
-            }
-            output.clear();
-            output.addAll(newOutput);
-        }
-        for (String key : output) {
-            sb.append(key + "\n");
-        }
-        System.out.println(output.size() + "\n" + sb);
-    }
-
     public static void EISUBARRAY() {
         int n = ni();
         int[] A = new int[n];
@@ -212,8 +187,6 @@ public class App {
         }
         System.out.println(giftWrapt);
     }
-
-    
 
     // Bộ reader mới
     static InputStream is = System.in;
