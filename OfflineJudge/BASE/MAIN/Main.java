@@ -1,83 +1,59 @@
-import java.util.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 
 class  Main {
     public static void main(String[] args) throws Exception {
-        EIGIFTS();
+        EIEQUALS();
     }
 
-    public static void EIPAIR() {
-        int numOfT = ni();
-
-        for (int i = 0; i < numOfT; i++) {
-            Map<Integer, Integer> gifts = new HashMap<>();
-            int numOfG = ni();
-            for (int j = 0; j < numOfG; j++) {
-                int g = ni();
-                gifts.put(g, gifts.getOrDefault(g, 0) + 1);
-            }
-            long numOfWays = 0;
-            for (int g : gifts.values()) {
-                numOfWays += (((long) g * ((long) g - 1)) / 2);
-            }
-            System.out.println(numOfWays);
+    public static void EIEQUALS() {
+        // Ý tưởng : tính tổng 2 dãy r lấy abs 2 tổng nếu lớn hơn k thì out, còn không
+        // làm tiếp
+        // dùng 2 con trỏ đếm xem bao nhiêu số khác nhau, nếu có nhiều hơn 1 thì no còn
+        // khôn thì yes
+        int n = ni();
+        int k = ni();
+        int count1 = 0;
+        int count2 = 0;
+        int[] arrA = new int[n];
+        int[] arrB = new int[n];
+        for (int i = 0; i < n; i++) {
+            arrA[i] = ni();
+            count1 += arrA[i];
         }
-    }
-
-    public static void EIULOVE() {
-        long numOfGift = nl();
-        long moneyInPock = nl();
-        long giftMax = -1;
-
-        for (int i = 0; i < numOfGift; i++) {
-            int temp = ni();
-            if (temp > giftMax && temp < moneyInPock) {
-                giftMax = temp;
-            }
+        for (int i = 0; i < n; i++) {
+            arrB[i] = ni();
+            count2 += arrB[i];
         }
 
-        System.out.println(giftMax);
-    }
-
-    public static void EIGIFTS() {
-        int numOfGift = ni();
-        long moneyInPock = nl();
-
-        long totalAmount = -1;
-        long difBtwTGift = Integer.MAX_VALUE;
-
-        long[] gifts = new long[numOfGift];
-
-        for (int i = 0; i < numOfGift; i++) {
-            gifts[i] = nl();
-        }
-
-        Arrays.sort(gifts);
-
-        int left = 0;
-        int right = gifts.length - 1;
-
-        while (left < right) {
-            long totalTemp = gifts[left] + gifts[right];
-
-            if (totalTemp > moneyInPock) {
-                right--; 
-            } else {
-                long diff = Math.abs(gifts[left] - gifts[right]);
-
-                if (totalTemp > totalAmount || (totalTemp == totalAmount && diff < difBtwTGift)) {
-                    totalAmount = totalTemp;
-                    difBtwTGift = diff;
-                }
-                left++; 
-            }
-        }
-
-        if (totalAmount == -1) {
-            System.out.println("-1 -1");
+        if (Math.abs(count1 - count2) > k) {
+            System.out.println("NO");
         } else {
-            System.out.println(totalAmount + " " + difBtwTGift);
+            Arrays.sort(arrA);
+            Arrays.sort(arrB);
+            int temp = 0;
+            int i = 0;
+            int j = 0;
+            while (i < n && j < n) {
+                if (arrA[i] == arrB[j]) {
+                    i++;
+                    j++;
+                } else if (arrA[i] < arrB[j]) {
+                    i++;
+                    temp++;
+                } else {
+                    j++;
+                }
+            }
+            if (temp > 1) {
+                System.out.println("NO");
+            } else {
+                System.out.println("YES");
+            }
         }
+
     }
 
     // Bộ reader mới
