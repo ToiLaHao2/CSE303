@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div x-data="boardModel" class="flex justify-center items-center h-screen">
+    <div class="game-container flex flex-col gap-4 font-semibold">
+        <div x-text="`Steps: ${steps}`"></div>
+        <div class="aspect-square rounded-lg max-w-sm w-96 flex-1">
+            <template x-for="(row, i) in board">
+                <div class="grid grid-cols-3">
+                    <template x-for="(cell, j) in row">
+                        <div
+                            class="aspect-square border hover:opacity-80 cursor-pointer"
+                            :class="cell ? 'bg-indigo-500' : ''"
+                            @click="swap(i, j)"
+                        ></div>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <div class="flex justify-end">
+            <button class="px-4 py-2 font-semibold text-sm bg-amber-500 text-white rounded-md shadow-sm opacity-100" @click="resetBoard()">Reset</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('boardModel', () => ({
+            board: [],
+            steps: 0,
+            directions: [[0, 0], [-1, 0], [1, 0], [0, 1], [0, -1]],
+            boardSize: 3,
+            init() {
+                this.resetBoard();
+            },
+            resetBoard() {
+                this.board = [[false, false, false], [false, false, false], [false, false, false]];
+                this.steps = 0;
+            },
+            swap(row, col) {
+                this.steps++;
+                this.directions.forEach(([x, y]) => {
+                    x += row;
+                    y += col;
+
+                    if (x >= 0 && x < this.boardSize && y >= 0 && y < this.boardSize) {
+                        this.board[x][y] = !this.board[x][y];
+                    }
+                })
+            }
+        }))
+    })
+</script>
+</body>
+</html>

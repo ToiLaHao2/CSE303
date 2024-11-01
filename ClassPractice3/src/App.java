@@ -3,7 +3,7 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        EIUSUBSET();
+        EIFLIP();
     }
 
     public static void EIEQUALS() {
@@ -105,49 +105,51 @@ public class App {
 
     public static void EIFLIP() {
         int n = ni();
+        boolean hasStar = false;
+        int totalSteps = 10; // Số bước nhấn tối thiểu khởi tạo lớn hơn 9
 
-        while (n > 0) {
-
+        while (n-- > 0) {
             // nhap
             MatrixMap resultMatrix = new MatrixMap();
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     char x = nc();
                     if (x == '*') {
-                        resultMatrix.SetPosition(i, j, true);
-                    } else {
-                        resultMatrix.SetPosition(i, j, false);
+                        resultMatrix.SetPosition(i, j);
+                        hasStar = true;
                     }
                 }
             }
 
-            // ArrayList<ArrayList<Node>>subsets = new ArrayList<>();
-            // for (int i = 0; i < 3; i++) {
-            // for (int j = 0; j < 3; j++)
-            // subsets.add(new Node(i,j));
-            // int temp = subsets.size() - 1;
-            // for (int j = 0; j < temp; j++) {
-            // ArrayList<Integer>newSet= new ArrayList<>();
-            // newSet.add(i);
-            // newSet.addAll(subsets.get(j));
-            // if (compareMatrix(translateSet(newSet),resultSet)==true){
-            // System.out.println(newSet.size());
-            // break;
-            // }
-            // subsets.add(newSet);
-            // }
-            // }
-            n--;
+            if (!hasStar) {
+                System.out.println(0);
+                continue;
+            }
+
+            // Duyệt qua tất cả các tổ hợp nhấn bằng cách sử dụng bitmask
+            for (int mask = 0; mask < (1 << 9); mask++) {
+                MatrixMap currentMap = new MatrixMap();
+                int stepCount = 0;
+
+                // Áp dụng nhấn theo các bit của `mask`
+                for (int i = 0; i < 9; i++) {
+                    if ((mask & (1 << i)) != 0) { // Kiểm tra xem bit thứ i có được nhấn không
+                        int x = i / 3;
+                        int y = i % 3;
+                        currentMap.ClickCell(x, y); // Nhấn ô (x, y) và lật các ô lân cận
+                        stepCount++;
+                    }
+                }
+
+                // System.out.println(currentMap.toString());
+                // Kiểm tra nếu ma trận hiện tại khớp với targetMap
+                if (currentMap.CompareMap(resultMatrix)) {
+                    totalSteps = stepCount;
+                }
+            }
+
+            System.out.println(totalSteps);
         }
-
-    }
-
-    public MatrixMap translateSet(ArrayList<Integer> set) {
-        MatrixMap resultMap = new MatrixMap();
-        for (Integer integer : set) {
-
-        }
-        return resultMap;
     }
 
     public static class MatrixMap {
@@ -162,13 +164,31 @@ public class App {
             }
         }
 
-        public void SetPosition(int x, int y, boolean value) {
-            matrix[x][y] = value;
+        public void SetPosition(int x, int y) {
+            if (matrix[x][y] == true) {
+                matrix[x][y] = false;
+            } else {
+                matrix[x][y] = true;
+            }
+        }
+
+        public void ClickCell(int x, int y) {
+            int[] dx = { 0, 1, -1, 0, 0 };
+            int[] dy = { 0, 0, 0, 1, -1 };
+
+            for (int i = 0; i < 5; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (nx >= 0 && nx < 3 && ny >= 0 && ny < 3) {
+                    SetPosition(nx, ny);
+                }
+
+            }
         }
 
         public boolean CompareMap(MatrixMap mapT) {
             for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 0; j++) {
+                for (int j = 0; j < 3; j++) {
                     if (matrix[i][j] != mapT.matrix[i][j]) {
                         return false;
                     }
@@ -176,16 +196,22 @@ public class App {
             }
             return true;
         }
-    }
 
-    public static class Node {
-        private int x;
-        private int y;
-
-        public Node(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
+        // @Override
+        // public String toString() {
+        // StringBuilder sb = new StringBuilder();
+        // for (int i = 0; i < 3; i++) {
+        // for (int j = 0; j < 3; j++) {
+        // if (matrix[i][j] == true) {
+        // sb.append(1 + " ");
+        // } else {
+        // sb.append(0 + " ");
+        // }
+        // }
+        // sb.append("\n");
+        // }
+        // return sb.toString();
+        // }
     }
 
     // Bộ reader mới
