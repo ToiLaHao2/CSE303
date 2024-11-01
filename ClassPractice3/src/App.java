@@ -3,7 +3,7 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        EIFLIP();
+        BitMaskExample();
     }
 
     public static void EIEQUALS() {
@@ -212,6 +212,24 @@ public class App {
         // }
         // return sb.toString();
         // }
+    }
+
+    public static void BitMaskExample() {
+        for (int mask = 1; mask <= 10; mask++) {
+            String binaryString = Integer.toBinaryString(mask);
+
+            // Thêm các số 0 ở phía trước để đạt độ dài 9 bit
+            while (binaryString.length() < 9) {
+                binaryString = "0" + binaryString;
+            }
+            System.out.println("Mask: " + mask + " " + binaryString);
+            for (int i = 0; i < 9; i++) {
+                int bitCheck = mask & (1 << i); // Kiểm tra giá trị của bit thứ i
+                boolean isSet = (bitCheck != 0); // Kiểm tra xem bit thứ i có được đặt không
+                System.out.printf("  i = %d, bitCheck = %d, isSet = %b%n", i, bitCheck, isSet);
+            }
+            System.out.println(); // Dòng trống giữa các mask
+        }
     }
 
     // Bộ reader mới
