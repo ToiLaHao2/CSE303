@@ -39,23 +39,37 @@ public class App {
     }
 
     public static void EIPAGES() {
-        int n = ni();
-        StringBuilder sb = new StringBuilder();
-        TreeSet<Integer> trS = new TreeSet<>();
+        var n = ni();
+        int[] listPages = new int[n];
+        StringBuilder out = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
-            trS.add(ni());
+            listPages[i] = ni();
         }
+        Arrays.sort(listPages);
 
-        int temp = 0;
+        for (int i = 0; i < n;) {
+            int start = listPages[i];
+            int end = start;
 
-        while (trS.isEmpty() != true) {
-            int x = trS.first();
-            if (temp == 0) {
-                sb.append(x);
+            // Kiểm tra liên tiếp và tìm khoảng cuối
+            while (i + 1 < n && listPages[i + 1] == listPages[i] + 1) {
+                end = listPages[++i];
             }
 
+            // Nếu có từ 3 số liên tiếp trở lên thì dùng dấu '-'
+            if (end - start >= 2) {
+                out.append(start).append("-").append(end).append(" ");
+            } else if (end - start == 1) { // 2 số liên tiếp
+                out.append(start).append(" ").append(end).append(" ");
+            } else { // Không có số liên tiếp
+                out.append(start).append(" ");
+            }
+
+            i++;
         }
+
+        System.out.println(out.toString().trim());
     }
 
     public static void EISUBARRAY() {
