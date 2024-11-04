@@ -104,12 +104,9 @@ public class App {
         int n = ni();
         int m = ni();
         int x = ni();
-        int count = 0;
-        int h = 0;
 
         int[] men = new int[n];
         int[] women = new int[m];
-        Map<Integer, Integer> pairs = new TreeMap<>();
 
         for (int i = 0; i < men.length; i++) {
             men[i] = ni();
@@ -122,31 +119,47 @@ public class App {
         Arrays.sort(men);
         Arrays.sort(women);
 
-        int high = (men[n - 1] - women[0]) > (women[m - 1] - men[0]) ? (women[m - 1] - men[0])
-                : (men[n - 1] - women[0]);
-        int mid = high / 2;
+        int low = 0;
+        int high = Math.max(men[n - 1], women[m - 1]) - Math.min(men[0], women[0]);
+        int result = high;
 
-        for (int i = 0; i < men.length; i++) {
-            for (int j = 0; j < women.length; j++) {
-                int diff = Math.abs(men[i] - women[j]);
-                if (diff < mid) {
-                    pairs.put(diff, pairs.getOrDefault(diff, 0) + 1);
-                } else {
-                    break;
-                }
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (canFormPairs(men, women, x, mid)) {
+                result = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
 
-        for (Map.Entry<Integer, Integer> entry : pairs.entrySet()) {
-            h = entry.getKey();
-            Integer value = entry.getValue();
-            count += value;
-            if (count > x) {
-                break;
+        System.out.println(result);
+    }
+
+    private static boolean canFormPairs(int[] men, int[] women, int x, int H) {
+        int i = 0, j = 0, pairs = 0;
+
+        // Duyệt qua cả hai danh sách đã sắp xếp
+        while (i < men.length && j < women.length) {
+            // Nếu độ chênh lệch nằm trong khoảng H, ghép cặp và tăng cả i và j
+            if (Math.abs(men[i] - women[j]) <= H) {
+                pairs++;
+                i++;
+                j++;
+                // Nếu đã đủ số cặp yêu cầu, trả về true
+                if (pairs >= x)
+                    return true;
+            } else if (men[i] < women[j]) {
+                // Tăng i nếu chiều cao của người nam nhỏ hơn chiều cao của người nữ
+                i++;
+            } else {
+                // Tăng j nếu chiều cao của người nữ nhỏ hơn chiều cao của người nam
+                j++;
             }
         }
 
-        System.out.println(h);
+        // Trả về true nếu số cặp ghép được đủ lớn, ngược lại trả về false
+        return pairs >= x;
     }
 
     // Bộ reader mới
