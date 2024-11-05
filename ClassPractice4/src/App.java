@@ -3,7 +3,29 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        EIPMOD();
+    }
+
+    public static void EIPMOD() {
+        long x, n, k;
+        x = nl();
+        n = nl();
+        k = nl();
+
+        System.out.println(powerMod(x, n, k));
+    }
+
+    public static long powerMod(long x, long n, long k) {
+        if (n == 0) {
+            return 1 % k;
+        }
+        long result = powerMod(x, n / 2, k);
+        result = (result * result) % k; // Đảm bảo x nhỏ hơn k
+
+        if (n % 2 != 0) {
+            result = (result * x) % k;
+        }
+        return result;
     }
 
     // Bộ reader mới
