@@ -34,7 +34,7 @@ public class App {
             int temp = 0;
             int i = 0;
             int j = 0;
-            while (i < n && j < n && temp > 1) {
+            while (i < n && j < n) {
                 if (arrA[i] == arrB[j]) {
                     i++;
                     j++;
