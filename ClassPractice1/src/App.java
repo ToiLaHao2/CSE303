@@ -74,30 +74,21 @@ public class App {
 
     public static void EISUBARRAY() {
         int n = ni();
-        int[] A = new int[n];
+        int totalMax = 0;
+        int totalMin = 0;
+        int result = 0;
 
         for (int i = 0; i < n; i++) {
-            A[i] = ni();
+            int num = ni();
+            totalMax = Math.max(totalMax + num, 0);
+            totalMin = Math.min(totalMin + num, 0);
+
+            if (totalMax > 0) {
+                result = Math.max(totalMax, result);
+            } else {
+                result = Math.max(Math.abs(totalMin), result);
+            }
         }
-
-        int max_ending_here = A[0];
-        int max_so_far = A[0];
-
-        for (int i = 1; i < A.length; i++) {
-            max_ending_here = Math.max(A[i], max_ending_here + A[i]);
-            max_so_far = Math.max(max_so_far, max_ending_here);
-        }
-
-        int min_ending_here = A[0];
-        int min_so_far = A[0];
-
-        for (int i = 1; i < A.length; i++) {
-            min_ending_here = Math.min(A[i], min_ending_here + A[i]);
-            min_so_far = Math.min(min_so_far, min_ending_here);
-        }
-
-        int result = Math.max(Math.abs(max_so_far), Math.abs(min_so_far));
-
         System.out.println(result);
     }
 
