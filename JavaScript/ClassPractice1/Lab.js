@@ -3,21 +3,16 @@ process.stdin.setEncoding("utf8");
 
 let arr = [];
 process.stdin.on("data", function(chunk) {
-    arr.push(...chunk.trim().split(/\s+/));
+    arr.push(chunk);
 });
 
 process.stdin.on("end", function() {
-    arr = arr.trim().split("\n");
-
-    if (arr.length > 0) {
-        console.log("Dữ liệu đã nhập:", arr); // Kiểm tra dữ liệu đầu vào
-        main(arr);
-    } else {
-        console.error("Không có đủ dữ liệu đầu vào.");
-        process.exit(1);
-    }
-    main(inputLines);
+    main(arr);
 });
+
+setTimeout(() => {
+    process.stdin.emit('end');
+}, 10000);
 
 async function main(arr) {
     await EIMIN(arr);
@@ -84,5 +79,3 @@ async function EIPAGES() {
 
     console.log(strArray.join(""));
 }
-
-main();
