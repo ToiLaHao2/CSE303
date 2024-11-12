@@ -2,7 +2,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class App {
+class  Main {
     public static void main(String[] args) throws Exception {
         EIUDEPRE();
     }
@@ -55,13 +55,12 @@ public class App {
     }
 
     public static void EIUDEPRE() {
-        int n;
-        long c, r;
+        int n, c, r;
         n = ni();
-        c = nl();
-        r = nl();
+        c = ni();
+        r = ni();
 
-        DecimalFormat df = new DecimalFormat("#.######");
+        DecimalFormat df = new DecimalFormat("#.###############");
 
         double left = 0;
         double right = 1;
@@ -79,11 +78,11 @@ public class App {
             }
         }
 
-        // double result = (right + mid) / 2;
-        System.out.println(df.format(mid));
+        double result = (right + mid) / 2;
+        System.out.println(df.format(result));
     }
 
-    public static double resultAfterYears(long c, int n, double rate) {
+    public static double resultAfterYears(int c, int n, double rate) {
         double result = c;
         for (int i = 0; i < n; i++) {
             result *= (1 - rate + rate * i / n);
@@ -190,3 +189,4 @@ public class App {
         }
     }
 }
+
