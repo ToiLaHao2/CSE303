@@ -91,6 +91,15 @@ public class App {
         return result;
     }
 
+    public static void EIDIVIDE() {
+        int n, L, R;
+        n = ni();
+        L = ni();
+        R = ni();
+
+        
+    }
+
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
