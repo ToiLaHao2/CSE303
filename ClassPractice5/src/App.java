@@ -1,102 +1,148 @@
 import java.io.*;
-import java.text.DecimalFormat;
+// import java.text.DecimalFormat;
 import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        EIUDEPRE();
+        EIUQUISORT();
     }
 
-    public static void EIPMOD() {
-        long x, n, k;
-        x = nl();
-        n = nl();
-        k = nl();
+    public static void EIUBISEA() {
+        int numberOfNums = ni();
+        int numberOfSearchNums = ni();
 
-        System.out.println(powerMod(x, n, k));
-    }
+        int[] listNums = new int[numberOfNums];
 
-    public static long powerMod(long x, long n, long k) {
-        if (n == 0) {
-            return 1 % k;
-        }
-        long result = powerMod(x, n / 2, k);
-        result = (result * result) % k; // Đảm bảo x nhỏ hơn k
+        StringBuilder output = new StringBuilder();
 
-        if (n % 2 != 0) {
-            result = (result * x) % k;
-        }
-        return result;
-    }
-
-    public static void EISUBSET2() {
-        int n, k;
-        n = ni();
-        k = ni();
-        List<Integer> subsets = new ArrayList<>();
-        int count = 0;
-
-        for (int i = 0; i < n; i++) {
-            int numIn = ni();
-            subsets.add(numIn);
-            int temp = subsets.size() - 1;
-            for (int j = 0; j < temp; j++) {
-                subsets.add(numIn + subsets.get(j));
-            }
+        for (int i = 0; i < numberOfNums; i++) {
+            listNums[i] = ni();
         }
 
-        for (Integer integer : subsets) {
-            if (integer == k) {
-                count++;
-            }
-        }
+        Arrays.sort(listNums);
 
-        System.out.println(count);
-    }
-
-    public static void EIUDEPRE() {
-        int n;
-        long c, r;
-        n = ni();
-        c = nl();
-        r = nl();
-
-        DecimalFormat df = new DecimalFormat("#.######");
-
-        double left = 0;
-        double right = 1;
-        double mid = 0;
-
-        while (right - left > 0.0000001) {
-            mid = (left + right) / 2;
-
-            double currentValue = resultAfterYears(c, n, mid);
-
-            if (currentValue >= r) {
-                left = mid;
+        for (int i = 0; i < numberOfSearchNums; i++) {
+            int key = ni();
+            int index = Arrays.binarySearch(listNums, key);
+            if (index >= 0) { // Nếu tìm thấy
+                while (index > 0 && listNums[index - 1] == key) {
+                    index--;
+                }
+                output.append(index + " ");
             } else {
-                right = mid;
+                output.append("-1 ");
+            }
+
+        }
+
+        System.out.println(output);
+    }
+
+    public static void EIUMERSORT() {
+        int n = ni();
+        int[] list = new int[n];
+        for (int i = 0; i < n; i++) {
+            list[i] = ni();
+        }
+        StringBuilder output = new StringBuilder();
+
+        mergeSort(list, 0, n - 1);
+        for (int i : list) {
+            output.append(i + "\n");
+        }
+
+        System.out.println(output);
+    }
+
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+
+            merge(arr, left, mid, right);
+        }
+    }
+
+    public static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Tạo mảng tạm
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Sao chép dữ liệu
+        for (int i = 0; i < n1; i++)
+            L[i] = arr[left + i];
+        for (int i = 0; i < n2; i++)
+            R[i] = arr[mid + 1 + i];
+
+        // Gộp lại\
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k++] = L[i++];
+            } else {
+                arr[k++] = R[j++];
             }
         }
 
-        // double result = (right + mid) / 2;
-        System.out.println(df.format(mid));
+        // Sao chép phần còn lại
+        while (i < n1)
+            arr[k++] = L[i++];
+        while (j < n2)
+            arr[k++] = R[j++];
     }
 
-    public static double resultAfterYears(long c, int n, double rate) {
-        double result = c;
+    public static void EIUQUISORT() {
+        int n = ni();
+        long[] list = new long[n];
         for (int i = 0; i < n; i++) {
-            result *= (1 - rate + rate * i / n);
+            list[i] = ni();
         }
-        return result;
+        StringBuilder output = new StringBuilder();
+
+        quickSort(list, 0, n - 1);
+        for (long i : list) {
+            output.append(i + "\n");
+        }
+
+        System.out.println(output);
     }
 
-    public static void EIDIVIDE() {
-        int n, L, R;
-        n = ni();
-        L = ni();
-        R = ni();
+    public static void quickSort(long[] arr, int low, int high) {
+        if (low < high) {
+            int randomIndex = low + (int) (Math.random() * (high - low + 1));
+            swap(arr, randomIndex, high);
+            int[] partition = threeWayPartition(arr, low, high);
+            quickSort(arr, low, partition[0] - 1);
+            quickSort(arr, partition[1] + 1, high);
+        }
+    }
 
+    public static int[] threeWayPartition(long[] arr, int low, int high) {
+        long pivot = arr[high];
+        int lt = low, gt = high;
+        int i = low;
+
+        while (i <= gt) {
+            if (arr[i] < pivot) {
+                swap(arr, i++, lt++);
+            } else if (arr[i] > pivot) {
+                swap(arr, i, gt--);
+            } else {
+                i++;
+            }
+        }
+        return new int[] { lt, gt };
+    }
+
+    public static void swap(long[] arr, int l, int r) {
+        long temp = arr[l];
+        arr[l] = arr[r];
+        arr[r] = temp;
     }
 
     // Bộ reader mới
