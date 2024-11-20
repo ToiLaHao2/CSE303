@@ -145,6 +145,7 @@ public class App {
         arr[r] = temp;
     }
 
+    
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
