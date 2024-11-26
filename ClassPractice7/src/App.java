@@ -1,86 +1,36 @@
 import java.io.*;
+// import java.text.DecimalFormat;
 import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        EIUGAME();
+
     }
 
-    public static void LOGGING() {
-        int numberOfLogs = ni();
+    // EIJUMP
+    public static void EIJUMP() {
 
-        long[] logs = new long[numberOfLogs + 1];
-        logs[0] = 0;
-        logs[1] = Math.max(nl(), logs[0]);
-
-        for (int i = 2; i < numberOfLogs + 1; i++) {
-            logs[i] = Math.max(logs[i - 2] + nl(), logs[i - 1]);
-        }
-
-        System.out.println(logs[numberOfLogs]);
     }
 
-    //
-    public static void EIUGAME() {
-        int n = ni();
-        int m = ni();
+    static class Node {
+        int index, step;
 
-        long[] nums = new long[m + 1];
-        Arrays.fill(nums, Long.MIN_VALUE);
-
-        nums[0] = 0;
-        nums[1] = 0;
-
-        for (int i = 0; i < n; i++) {
-            nums[1] += nl();
-            for (int j = 2; j < m; j++) {
-                nums[j] = nl() + Math.max(nums[j - 1], nums[j]);
-            }
-        }
-
-        System.out.println(nums[m]);
     }
 
-    // public static void EIUGAME() {
-    // int n = ni();
-    // int m = ni();
+    // EIULOGGING2
+    public static void EIULOGGING2() {
 
-    // int[][] matrix = new int[n][m];
+    }
 
-    // for (int[] is : matrix) {
-    // for (int j = 0; j < is.length; j++) {
-    // is[j] = ni();
-    // }
-    // }
+    // EIULOGGING3
+    public static void EIULOGGING3() {
 
-    // int max = matrix[0][0];
+    }
 
-    // int i = 0;
-    // int j = 0;
+    // EIDIVIDE
+    public static void EIDIVIDE() {
 
-    // while (i < n - 1 || j < m - 1) {
-    // if (j == m - 1) {
-    // // Nếu đang ở cột cuối cùng, chỉ có thể đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // } else if (i == n - 1) {
-    // // Nếu đang ở hàng cuối cùng, chỉ có thể đi sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else if (matrix[i][j + 1] > matrix[i + 1][j]) {
-    // // Chọn sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else {
-    // // Chọn đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // }
-    // }
-
-    // System.out.println(max);
-    // }
-    
+    }
 
     // Bộ reader mới
     static InputStream is = System.in;
