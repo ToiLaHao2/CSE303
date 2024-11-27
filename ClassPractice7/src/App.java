@@ -4,32 +4,108 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
+        EIULOGGING3();
     }
 
     // EIJUMP
     public static void EIJUMP() {
+        int n = ni();
+        int[] arr = new int[n];
 
-    }
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = ni();
+        }
 
-    static class Node {
-        int index, step;
+        int[] dp = new int[n];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
 
+        Map<Integer, Integer> lastSeen = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            // nhảy tới từ hòng đá trước đó
+            if (i > 0) {
+                dp[i] = Math.min(dp[i], dp[i - 1] + 1);
+            }
+            // nhảy tới từ hòn đá gần nhất
+            if (lastSeen.containsKey(arr[i])) {
+                dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
+            }
+            // cập nhật vị trí hiện tại của hòn đá
+            lastSeen.put(arr[i], i);
+        }
+        System.out.println(dp[n - 1]);
     }
 
     // EIULOGGING2
     public static void EIULOGGING2() {
+        int numberOfLogs = ni();
+        long[] logs = new long[numberOfLogs];
+        long result = 0;
 
+        if (numberOfLogs == 1) {
+            result = Math.max(result, nl());
+        } else if (numberOfLogs == 2) {
+            for (int i = 0; i < numberOfLogs; i++) {
+                result = Math.max(result, nl());
+            }
+        } else {
+            for (int i = 0; i < logs.length; i++) {
+                logs[i] = nl();
+            }
+            long[] dp = new long[numberOfLogs];
+            dp[0] = Math.max(0, logs[0]);
+            dp[1] = Math.max(dp[0], logs[1]);
+            dp[2] = Math.max(dp[1], logs[2]);
+
+            for (int i = 3; i < numberOfLogs; i++) {
+                dp[i] = Math.max(dp[i - 1], dp[i - 3] + logs[i]);
+            }
+
+            result = dp[numberOfLogs - 1];
+        }
+
+        System.out.println(result);
     }
 
     // EIULOGGING3
     public static void EIULOGGING3() {
+        int numberOfLogs = ni();
+        long MOD = 1_000_000_007;
 
+        long[] logs = new long[numberOfLogs + 1];
+        long[] count = new long[numberOfLogs + 1];
+        logs[0] = 0;
+        count[0] = 1;
+        logs[1] = Math.max(nl(), logs[0]);
+        count[1] = logs[1] > 0 ? 1 : 1;
+
+        for (int i = 2; i < numberOfLogs + 1; i++) {
+            long value = nl(); // Giá trị cây thứ i
+
+            // Tính giá trị tối đa tại cây i
+            if (logs[i - 1] > logs[i - 2] + value) {
+                logs[i] = logs[i - 1];
+                count[i] = count[i - 1];
+            } else if (logs[i - 2] + value > logs[i - 1]) {
+                logs[i] = logs[i - 2] + value;
+                count[i] = count[i - 2];
+            } else { // logs[i-1] == logs[i-2] + value
+                logs[i] = logs[i - 1];
+                count[i] = (count[i - 1] + count[i - 2]) % MOD;
+            }
+        }
+
+        System.out.println(logs[numberOfLogs] + " " + count[numberOfLogs]);
+
+        // 3 1 3 3 2 2
+        // 0 3 3 6 6 8 8
+        // 1 1 2 2 3 3
     }
 
     // EIDIVIDE
     public static void EIDIVIDE() {
-
+        
     }
 
     // Bộ reader mới

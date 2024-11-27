@@ -1,85 +1,83 @@
 import java.io.*;
+// import java.text.DecimalFormat;
 import java.util.*;
 
 class  Main {
     public static void main(String[] args) throws Exception {
-        EIUGAME();
+        EIULOGGING2();
     }
 
-    public static void LOGGING() {
-        int numberOfLogs = ni();
+    // EIJUMP
+    public static void EIJUMP() {
+        int n = ni();
+        int[] arr = new int[n];
 
-        long[] logs = new long[numberOfLogs + 1];
-        logs[0] = 0;
-        logs[1] = Math.max(nl(), logs[0]);
-
-        for (int i = 2; i < numberOfLogs + 1; i++) {
-            logs[i] = Math.max(logs[i - 2] + nl(), logs[i - 1]);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = ni();
         }
 
-        System.out.println(logs[numberOfLogs]);
-    }
+        int[] dp = new int[n];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
 
-    //
-    public static void EIUGAME() {
-        int n = ni();
-        int m = ni();
-
-        long[] nums = new long[m + 1];
-        
-
-        nums[0] = 0;
-        nums[1] = 0;
+        Map<Integer, Integer> lastSeen = new HashMap<>();
 
         for (int i = 0; i < n; i++) {
-            nums[1] += nl();
-            for (int j = 2; j < m; j++) {
-                nums[j] = nl() + Math.max(nums[j - 1], nums[j]);
+            // nhảy tới từ hòng đá trước đó
+            if (i > 0) {
+                dp[i] = Math.min(dp[i], dp[i - 1] + 1);
             }
+            // nhảy tới từ hòn đá gần nhất
+            if (lastSeen.containsKey(arr[i])) {
+                dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
+            }
+            // cập nhật vị trí hiện tại của hòn đá
+            lastSeen.put(arr[i], i);
         }
-
-        System.out.println(nums);
+        System.out.println(dp[n - 1]);
     }
 
-    // public static void EIUGAME() {
-    // int n = ni();
-    // int m = ni();
+    // EIULOGGING2
+    public static void EIULOGGING2() {
+        int numberOfLogs = ni();
+        long[] logs = new long[numberOfLogs];
+        long result = 0;
 
-    // int[][] matrix = new int[n][m];
+        if (numberOfLogs == 1) {
+            result = Math.max(result, nl());
+        } else if (numberOfLogs == 2) {
+            for (int i = 0; i < numberOfLogs; i++) {
+                result = Math.max(result, nl());
+            }
+        } else {
+            for (int i = 0; i < logs.length; i++) {
+                logs[i] = nl();
+            }
+            long[] dp = new long[numberOfLogs];
+            dp[0] = Math.max(0, logs[0]);
+            dp[1] = Math.max(dp[0], logs[1]);
+            dp[2] = Math.max(dp[1], logs[2]);
 
-    // for (int[] is : matrix) {
-    // for (int j = 0; j < is.length; j++) {
-    // is[j] = ni();
-    // }
-    // }
+            for (int i = 3; i < numberOfLogs; i++) {
+                dp[i] = Math.max(dp[i - 1], dp[i - 3] + logs[i]);
+            }
 
-    // int max = matrix[0][0];
+            result = dp[numberOfLogs - 1];
+        }
 
-    // int i = 0;
-    // int j = 0;
+        System.out.println(result);
+    }
 
-    // while (i < n - 1 || j < m - 1) {
-    // if (j == m - 1) {
-    // // Nếu đang ở cột cuối cùng, chỉ có thể đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // } else if (i == n - 1) {
-    // // Nếu đang ở hàng cuối cùng, chỉ có thể đi sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else if (matrix[i][j + 1] > matrix[i + 1][j]) {
-    // // Chọn sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else {
-    // // Chọn đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // }
-    // }
+    // EIULOGGING3
+    public static void EIULOGGING3() {
 
-    // System.out.println(max);
-    // }
+    }
+
+    // EIDIVIDE
+    public static void EIDIVIDE() {
+
+    }
+
     // Bộ reader mới
     static InputStream is = System.in;
     static byte[] inbuf = new byte[1 << 24];
