@@ -54,7 +54,9 @@ public class App {
             if (lastSeen.containsKey(arr[i])) {
                 dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
             }
+            lastSeen.put(arr[i], i);
         }
+        System.out.println(dp[n - 1]);
     }
 
     // EIULOGGING2
