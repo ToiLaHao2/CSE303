@@ -8,33 +8,53 @@ public class App {
     }
 
     // EIJUMP
+    // public static void EIJUMP() {
+    // int n = ni();
+    // int[] arr = new int[n];
+
+    // for (int i = 0; i < arr.length; i++) {
+    // arr[i] = ni();
+    // }
+
+    // int[] dp = new int[n];
+    // Arrays.fill(dp, Integer.MAX_VALUE);
+    // dp[0] = 0;
+
+    // Map<Integer, Integer> lastSeen = new HashMap<>();
+
+    // for (int i = 0; i < n; i++) {
+    // // nhảy tới từ hòng đá trước đó
+    // if (i > 0) {
+    // dp[i] = Math.min(dp[i], dp[i - 1] + 1);
+    // }
+    // // nhảy tới từ hòn đá gần nhất
+    // if (lastSeen.containsKey(arr[i])) {
+    // dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
+    // }
+    // // cập nhật vị trí hiện tại của hòn đá
+    // lastSeen.put(arr[i], i);
+    // }
+    // System.out.println(dp[n - 1]);
+    // }
+
     public static void EIJUMP() {
         int n = ni();
         int[] arr = new int[n];
-
         for (int i = 0; i < arr.length; i++) {
             arr[i] = ni();
         }
 
         int[] dp = new int[n];
-        Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = 0;
-
         Map<Integer, Integer> lastSeen = new HashMap<>();
-
         for (int i = 0; i < n; i++) {
-            // nhảy tới từ hòng đá trước đó
             if (i > 0) {
-                dp[i] = Math.min(dp[i], dp[i - 1] + 1);
+                dp[i] = Math.min(dp[i], dp[i - 1] + 1);// nhảy tới từ hòn đá trước đó
             }
-            // nhảy tới từ hòn đá gần nhất
             if (lastSeen.containsKey(arr[i])) {
                 dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
             }
-            // cập nhật vị trí hiện tại của hòn đá
-            lastSeen.put(arr[i], i);
         }
-        System.out.println(dp[n - 1]);
     }
 
     // EIULOGGING2
@@ -105,7 +125,7 @@ public class App {
 
     // EIDIVIDE
     public static void EIDIVIDE() {
-        
+
     }
 
     // Bộ reader mới

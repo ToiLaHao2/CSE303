@@ -143,11 +143,12 @@ public class App {
 
         for (int i = 0; i < numOfPics; i++) {
             int pic = ni();
-            if (Painting.containsKey(pic)) {
-                Painting.put(pic, Painting.get(pic) + 1);
-            } else {
-                Painting.put(pic, 1);
-            }
+            // if (Painting.containsKey(pic)) {
+            //     Painting.put(pic, Painting.get(pic) + 1);
+            // } else {
+            //     Painting.put(pic, 1);
+            // }
+            Painting.put(pic, Painting.getOrDefault(pic, 0) + 1);
         }
 
         ArrayList<Integer> ListPainting = new ArrayList<>(Painting.values());
