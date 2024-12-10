@@ -1,72 +1,20 @@
 import java.io.*;
+// import java.text.DecimalFormat;
 import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // EIUGAME();
-    }
-
-    // EIUGAME2 - The number of path
-    public static void EIUGAME2() {
 
     }
 
-    // EIUMEDARRAY4
-    public static void EIUMEDARRAY4() {
+    // EIUCOL
+    public static void EIUCOL() {
 
     }
-
-    // EIAPPLEBOX
-    public static void EIAPPLEBOX() {
-        int numOfTest = ni();
-        for (int i = 0; i < numOfTest; i++) {
-            int n, a;
-            long p;
-            n = ni();
-            a = ni();
-            p = nl();
-        }
-    }
-
-    // public static void EIUGAME() {
-    // int n = ni();
-    // int m = ni();
-
-    // int[][] matrix = new int[n][m];
-
-    // for (int[] is : matrix) {
-    // for (int j = 0; j < is.length; j++) {
-    // is[j] = ni();
-    // }
-    // }
-
-    // int max = matrix[0][0];
-
-    // int i = 0;
-    // int j = 0;
-
-    // while (i < n - 1 || j < m - 1) {
-    // if (j == m - 1) {
-    // // Nếu đang ở cột cuối cùng, chỉ có thể đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // } else if (i == n - 1) {
-    // // Nếu đang ở hàng cuối cùng, chỉ có thể đi sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else if (matrix[i][j + 1] > matrix[i + 1][j]) {
-    // // Chọn sang phải
-    // max += matrix[i][j + 1];
-    // j++;
-    // } else {
-    // // Chọn đi xuống
-    // max += matrix[i + 1][j];
-    // i++;
-    // }
-    // }
-
-    // System.out.println(max);
-    // }
+    // EITHIEF2
+    // EISTORE
+    // EIUDP2
+    // EIBORE
 
     // Bộ reader mới
     static InputStream is = System.in;
