@@ -8,29 +8,7 @@ public class App {
 
     // EIUGAME2 - The number of path
     public static void EIUGAME2() {
-        int numberItems = ni();
-        int p = ni(); // so can nang Tan co the vac
-        int[][] items = new int[numberItems][2];
 
-        for (int i = 0; i < numberItems; i++) {
-            items[i][0] = ni();
-            items[i][1] = ni();
-        }
-
-        System.out.println(calMaxThief(numberItems, p, items));
-    }
-
-    public static long calMaxThief(int numberItems, int p, int[][] items) {
-        long[] dp = new long[p + 1];
-
-        for (int i = 0; i < numberItems; i++) {
-            int weight = items[i][0];
-            int value = items[i][1];
-            for (int j = p; j >= weight; j--) {
-                dp[j] = Math.max(dp[j], dp[j - weight] + value);
-            }
-        }
-        return dp[p];
     }
 
     // EIUMEDARRAY4
