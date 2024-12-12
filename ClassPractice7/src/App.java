@@ -4,7 +4,7 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        EIULOGGING3();
+        EIDIVIDE();
     }
 
     // EIJUMP
@@ -125,9 +125,55 @@ public class App {
         // 1 1 2 2 3 3
     }
 
+    static long result = 0;
+
     // EIDIVIDE
     public static void EIDIVIDE() {
+        long n = nl();
+        long l = nl(); // range
+        long R = nl(); // range
 
+        int log2 = (int) (Math.log(n) / Math.log(2));
+        long middle = 0;
+
+        for (var i = 0; i < log2; i++) {
+            middle += (1L << i);
+        }
+
+        if (middle == n) {
+            middle = (middle - 1) / 2;
+        }
+        divideAndConquer(n, l, R, middle + 1, (middle + 1) / 2);
+        System.out.println(result);
+
+    }
+
+    public static void divideAndConquer(long n, long l, long r, long i, long depth) {
+        if (n == 2 || n == 3) {
+            long left = i - 1;
+            long right = i + 1;
+
+            if (left >= l && left <= r) {
+                result += 1;
+            }
+            if (right >= l && right <= r) {
+                result += 1;
+            }
+            if (n == 3 && l <= i && i <= r) {
+                result += 1;
+            }
+            return;
+        }
+
+        if (l <= i && i <= r) {
+            result += n % 2;
+        }
+        if (l < i) {
+            divideAndConquer(n / 2, l, r, i - depth, depth / 2);
+        }
+        if (r > i) {
+            divideAndConquer(n / 2, l, r, i + depth, depth / 2);
+        }
     }
 
     // Bộ reader mới
