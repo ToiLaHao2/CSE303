@@ -49,7 +49,7 @@ public class App {
     public static int partition(long[] arr, int low, int high) {
         long pivot = arr[high];
         int i = low - 1;
-
+ 
         for (int j = low; j < high; j++) {
             if (arr[j] < pivot) {
                 i++;
