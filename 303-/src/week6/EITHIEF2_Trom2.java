@@ -6,19 +6,37 @@ import java.util.*;;
 class EITHIEF2_Trom2 {
 
 	public static void main(String[] args) {
+		// int numberItems = ni();
+		// int p = ni(); //so can nang Tan co the vac
+		// int[][] items = new int[numberItems][2];
+
+		// for (int i = 0; i < numberItems; i++) {
+		// items[i][0] = ni();
+		// items[i][1] = ni();
+		// }
+
 		int numberItems = ni();
-		int p = ni(); //so can nang Tan co the vac
+		int p = ni();// khoi luong co the mang
 		int[][] items = new int[numberItems][2];
 
 		for (int i = 0; i < numberItems; i++) {
-			items[i][0] = ni();
-			items[i][1] = ni();
+			items[i][0] = ni(); // nhap khoi luong
+			items[i][1] = ni(); // nhap gia tri
 		}
 
 		System.out.println(calMaxThief(numberItems, p, items));
 	}
 
 	public static long calMaxThief(int numberItems, int p, int[][] items) {
+		// long[] dp = new long[p + 1];
+
+		// for (int i = 0; i < numberItems; i++) {
+		// int weight = items[i][0];
+		// int value = items[i][1];
+		// for (int j = p; j >= weight; j--) {
+		// dp[j] = Math.max(dp[j], dp[j - weight] + value);
+		// }
+		// }
 		long[] dp = new long[p + 1];
 
 		for (int i = 0; i < numberItems; i++) {
@@ -28,9 +46,10 @@ class EITHIEF2_Trom2 {
 				dp[j] = Math.max(dp[j], dp[j - weight] + value);
 			}
 		}
+
 		return dp[p];
 	}
-	
+
 	static InputStream is = System.in;
 	static byte[] inbuf = new byte[1 << 24];
 	static int lenbuf = 0, ptrbuf = 0;

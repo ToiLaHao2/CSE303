@@ -7,37 +7,84 @@ class EIEQUALS_Permutation {
 
 	public static void main(String[] args) {
 
+		// int n = ni();
+		// int k = ni();
+
+		// int[] arr1 = new int[n];
+		// int[] arr2 = new int[n];
+
+		// int totalList1 = 0;
+		// int totalList2 = 0;
+
+		// for (int i = 0; i < n; i++) {
+		// int number = ni();
+		// arr1[i] = number;
+		// totalList1 += number;
+		// }
+		// Arrays.sort(arr1);
+
+		// for (int i = 0; i < n; i++) {
+		// int number = ni();
+		// arr2[i] = number;
+		// totalList2 += number;
+		// }
+		// Arrays.sort(arr2);
+
+		// if (Math.abs(totalList1 - totalList2) > k) {
+		// System.out.println("NO");
+
+		// } else {
+		// int i = 0;
+		// int j = 0;
+		// int count = 0;
+
+		// while (i < n && j < n) {
+		// if (arr1[i] == arr2[j]) {
+		// i++;
+		// j++;
+		// } else if (arr1[i] < arr2[j]) {
+		// i++;
+		// count++;
+		// } else {
+		// j++;
+		// }
+		// }
+
+		// if (count > 1) {
+		// System.out.println("NO");
+		// } else {
+		// System.out.println("YES");
+		// }
+		// }
+
 		int n = ni();
 		int k = ni();
 
 		int[] arr1 = new int[n];
 		int[] arr2 = new int[n];
 
-		int totalList1 = 0;
-		int totalList2 = 0;
+		int count1 = 0;
+		int count2 = 0;
 
-		for (int i = 0; i < n; i++) {
-			int number = ni();
-			arr1[i] = number;
-			totalList1 += number;
+		for (int i = 0; i < arr1.length; i++) {
+			arr1[i] = ni();
+			count1 += arr1[i];
 		}
+
 		Arrays.sort(arr1);
 
-		for (int i = 0; i < n; i++) {
-			int number = ni();
-			arr2[i] = number;
-			totalList2 += number;
+		for (int i = 0; i < arr2.length; i++) {
+			arr2[i] = ni();
+			count2 += arr2[i];
 		}
 		Arrays.sort(arr2);
 
-		if (Math.abs(totalList1 - totalList2) > k) {
+		if (Math.abs(count1 - count2) > k) {
 			System.out.println("NO");
-
 		} else {
 			int i = 0;
 			int j = 0;
 			int count = 0;
-
 			while (i < n && j < n) {
 				if (arr1[i] == arr2[j]) {
 					i++;
@@ -47,16 +94,15 @@ class EIEQUALS_Permutation {
 					count++;
 				} else {
 					j++;
+					count++;
 				}
 			}
-
 			if (count > 1) {
 				System.out.println("NO");
 			} else {
 				System.out.println("YES");
 			}
 		}
-
 	}
 
 	static InputStream is = System.in;

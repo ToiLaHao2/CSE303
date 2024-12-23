@@ -6,15 +6,30 @@ import java.util.*;;
 class LOGGING_Logging {
 
 	public static void main(String[] args) {
-		int numberTrees = ni();
+		// int numberTrees = ni();
+
+		// long maxNotCuttingTree = 0;
+		// long maxCuttingTree = 0;
+
+		// for (int i = 0; i < numberTrees; i++) {
+		// long currentTree = nl();
+		// long temp = Math.max(maxNotCuttingTree + currentTree, maxCuttingTree);
+
+		// maxNotCuttingTree = maxCuttingTree;
+		// maxCuttingTree = temp;
+		// }
+
+		// System.out.println(maxCuttingTree);
+
+		int numberOfTrees = ni();
 
 		long maxNotCuttingTree = 0;
 		long maxCuttingTree = 0;
 
-		for (int i = 0; i < numberTrees; i++) {
-			long currentTree = nl();
-			long temp = Math.max(maxNotCuttingTree + currentTree, maxCuttingTree);
-			
+		for (int i = 0; i < numberOfTrees; i++) {
+			long currentTree = ni();
+			long temp = Math.max(currentTree + maxNotCuttingTree, maxCuttingTree);
+
 			maxNotCuttingTree = maxCuttingTree;
 			maxCuttingTree = temp;
 		}

@@ -6,27 +6,45 @@ import java.util.*;;
 class EIUGAME_MaximumPathSum {
 
 	public static void main(String[] args) {
+		// int n = ni();
+		// int m = ni();
+
+		// long path[] = new long[m + 1];
+
+		// Arrays.fill(path, Long.MIN_VALUE);
+		// path[1] = 0;
+
+		// long temp;
+
+		// for (int i = 1; i <= n; ++i) {
+		// path[1] += nl();
+
+		// for (int j = 2; j <= m; j++) {
+		// temp = nl();
+
+		// path[j] = Math.max(path[j], path[j - 1]) + temp;
+		// }
+		// }
+
+		// System.out.println(path[m]);
+
 		int n = ni();
 		int m = ni();
 
-		long path[] = new long[m + 1];
-
+		long[] path = new long[m];
 		Arrays.fill(path, Long.MIN_VALUE);
-		path[1] = 0;
+		path[0] = 0;
 
 		long temp;
 
-		for (int i = 1; i <= n; ++i) {
-			path[1] += nl();
-
-			for (int j = 2; j <= m; j++) {
+		for (int i = 0; i < n; i++) {
+			path[0] += nl();
+			for (int j = 1; j < m; j++) {
 				temp = nl();
-
 				path[j] = Math.max(path[j], path[j - 1]) + temp;
 			}
 		}
-
-		System.out.println(path[m]);
+		System.out.println(path[m - 1]);
 	}
 
 	static InputStream is = System.in;

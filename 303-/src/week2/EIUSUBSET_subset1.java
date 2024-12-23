@@ -6,34 +6,56 @@ import java.util.*;;
 class EIUSUBSET_subset1 {
 
 	public static void main(String[] args) {
+		// int n = ni();
+
+		// List<Integer> set = new ArrayList<>();
+		// StringBuilder sb = new StringBuilder();
+
+		// for (int i = 0; i < n; i++) {
+		// set.add(ni());
+		// }
+
+		// List<String> subset = new ArrayList<>();
+
+		// for (int i = set.size()-1; i >= 0; i--) {
+		// subset.add(String.valueOf(set.get(i)));
+		// int temp = subset.size() - 1;
+
+		// for (int j = 0; j < temp; j++) {
+		// subset.add(set.get(i) + " " + subset.get(j));
+		// }
+		// }
+
+		// sb.append(subset.size()).append("\n");
+
+		// for (var i : subset) {
+		// sb.append(i).append("\n");
+		// }
+		// System.out.println(sb);
+
 		int n = ni();
-		
 		List<Integer> set = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
-		
+
 		for (int i = 0; i < n; i++) {
 			set.add(ni());
 		}
-		
-		List<String> subset = new ArrayList<>();
-		
-		for (int i = set.size()-1; i >= 0; i--) {
-			subset.add(String.valueOf(set.get(i)));
-			int temp = subset.size() - 1;
-			
+
+		List<String> subdsets = new ArrayList<>();
+		for (int i = set.size() - 1; i >= 0; i--) {
+			subdsets.add(String.valueOf(set.get(i)));
+			int temp = subdsets.size() - 1;
 			for (int j = 0; j < temp; j++) {
-				subset.add(set.get(i) + " " + subset.get(j));
+				subdsets.add(set.get(i) + subdsets.get(j));
 			}
 		}
-		
-		sb.append(subset.size()).append("\n");
-		
-		for (var i : subset) {
-			sb.append(i).append("\n");
+		sb.append(subdsets.size() + "\n");
+		for (String string : subdsets) {
+			sb.append(string + "\n");
 		}
+
 		System.out.println(sb);
 	}
-
 
 	static InputStream is = System.in;
 	static byte[] inbuf = new byte[1 << 24];

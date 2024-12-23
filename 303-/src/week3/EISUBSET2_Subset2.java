@@ -6,31 +6,57 @@ import java.util.*;;
 class EISUBSET2_Subset2 {
 
 	public static void main(String[] args) {
+		// int n = ni();
+		// int k = ni();
+
+		// List<Integer> list = new ArrayList<>();
+
+		// for (int i = 0; i < n; i++) {
+		// int element = ni();
+		// list.add(element);
+		// }
+
+		// List<Integer> subsets = new ArrayList<>();
+
+		// for (int i = list.size() - 1; i >= 0; i--) {
+		// subsets.add(list.get(i));
+		// int subsetSize = subsets.size() - 1;
+
+		// for (int j = 0; j < subsetSize; j++) {
+		// subsets.add(list.get(i) + subsets.get(j));
+		// }
+		// }
+
+		// int count = 0;
+
+		// for (var subset : subsets) {
+		// if (subset == k) {
+		// count++;
+		// }
+		// }
+		// System.out.println(count);
+
 		int n = ni();
 		int k = ni();
 
 		List<Integer> list = new ArrayList<>();
-
 		for (int i = 0; i < n; i++) {
-			int element = ni();
-			list.add(element);
+			list.add(ni());
 		}
 
 		List<Integer> subsets = new ArrayList<>();
-
 		for (int i = list.size() - 1; i >= 0; i--) {
 			subsets.add(list.get(i));
 			int subsetSize = subsets.size() - 1;
-			
+
 			for (int j = 0; j < subsetSize; j++) {
 				subsets.add(list.get(i) + subsets.get(j));
 			}
 		}
-		
+
 		int count = 0;
-		
-		for (var subset : subsets) {
-			if (subset == k) {
+		for (Integer integer : subsets) {
+			if (integer == k) {
 				count++;
 			}
 		}

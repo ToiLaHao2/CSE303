@@ -38,6 +38,26 @@ public class App {
     // }
 
     public static void EIJUMP() {
+        // int n = ni();
+        // int[] arr = new int[n];
+        // for (int i = 0; i < arr.length; i++) {
+        // arr[i] = ni();
+        // }
+
+        // int[] dp = new int[n];
+        // dp[0] = 0;
+        // Map<Integer, Integer> lastSeen = new HashMap<>();
+        // for (int i = 0; i < n; i++) {
+        // if (i > 0) {
+        // dp[i] = Math.min(dp[i], dp[i - 1] + 1);// nhảy tới từ hòn đá trước đó
+        // }
+        // if (lastSeen.containsKey(arr[i])) {
+        // dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
+        // }
+        // lastSeen.put(arr[i], i);
+        // }
+        // System.out.println(dp[n - 1]);
+
         int n = ni();
         int[] arr = new int[n];
         for (int i = 0; i < arr.length; i++) {
@@ -49,14 +69,13 @@ public class App {
         Map<Integer, Integer> lastSeen = new HashMap<>();
         for (int i = 0; i < n; i++) {
             if (i > 0) {
-                dp[i] = Math.min(dp[i], dp[i - 1] + 1);// nhảy tới từ hòn đá trước đó
+                dp[i] = Math.min(dp[i], dp[i - 1] + 1);//
             }
             if (lastSeen.containsKey(arr[i])) {
                 dp[i] = Math.min(dp[i], dp[lastSeen.get(arr[i])] + 1);
             }
             lastSeen.put(arr[i], i);
         }
-        System.out.println(dp[n - 1]);
     }
 
     // EIULOGGING2
